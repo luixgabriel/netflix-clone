@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import TMDB from './api';
 import './App.css';
+import ListMovies from './components/movieRow/movieRow';
 
 export default function App() {
   const [movieList, setMovieList] = useState([]);
@@ -18,9 +19,9 @@ export default function App() {
   return (
     <div className="page">
       <section className="lists">
-        {movieList.map((item, key) => (
+        {movieList.map((item) => (
           <div>
-            {item.title}
+            <ListMovies key={item.id} title={item.title} itens={item.itens} />
           </div>
         ))}
       </section>
