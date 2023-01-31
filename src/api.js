@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 const apiKey = '00bb3908ca1c5f0bcd63e7eaf926d628';
 const baseUrl = 'https://api.themoviedb.org/3';
 
@@ -52,4 +53,19 @@ export default {
       itens: await basicFetch(`/discover/movie?with_genres=99&api_key=${apiKey}`),
     },
   ],
+
+  getMovieinfo: async (movieID, type) => {
+    let info = {};
+
+    if (movieID) {
+      switch (type) {
+        case 'movie': info = await basicFetch(`/movie/${movieID}?api_key=${apiKey}`);
+          break;
+        case 'tv': info = await basicFetch(`/tv/${movieID}?api_key=${apiKey}`);
+          break;
+      }
+    }
+
+    return info;
+  },
 };

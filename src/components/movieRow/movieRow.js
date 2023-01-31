@@ -22,6 +22,6 @@ export default function ListMovies({ title, itens }) {
 }
 
 ListMovies.propTypes = {
-  title: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
   itens: PropTypes.array.isRequired,
 };
