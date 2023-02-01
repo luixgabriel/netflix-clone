@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import TMDB from './api';
 import './App.css';
-import ListMovies from './components/movieRow/movieRow';
+import ListMovies from './components/movieRow/MovieRow';
 import FeaturedMovie from './components/featuredMovie/FeaturedMovie';
+import Header from './components/header/Header';
 
 export default function App() {
   const [movieList, setMovieList] = useState([]);
   const [featuredData, setFeaturedData] = useState(null);
+  const [blackHeader, setBlackHeader] = useState(false);
 
   useEffect(() => {
     const loadAll = async () => {
@@ -19,14 +21,34 @@ export default function App() {
       const randomChosen = Math.floor(Math.random() * (originals[0].itens.results.length - 1));
       const choosen = originals[0].itens.results[randomChosen];
       const choosenInfo = await TMDB.getMovieinfo(choosen.id, 'tv');
-      setFeaturedData(choosenInfo);
+      console.log(choosenInfo.overview.length);
+      if (choosenInfo.overview.length < 500) {
+        setFeaturedData(choosenInfo);
+      }
     };
 
     loadAll();
   }, []);
 
+  useEffect(() => {
+    const scrollListener = () => {
+      if (window.scrollY > 10) {
+        setBlackHeader(true);
+      } else {
+        setBlackHeader(false);
+      }
+    };
+
+    window.addEventListener('scroll', scrollListener);
+
+    return () => {
+      window.removeEventListener('scroll', scrollListener);
+    };
+  }, []);
+
   return (
     <div className="page">
+      <Header black={blackHeader} />
 
       {featuredData
         && <FeaturedMovie item={featuredData} />}
@@ -38,6 +60,9 @@ export default function App() {
           </div>
         ))}
       </section>
+      <footer>
+        <h4>Desenvolvido por: Luis Gabriel</h4>
+      </footer>
     </div>
   );
 }
