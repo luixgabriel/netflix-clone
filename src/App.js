@@ -50,8 +50,8 @@ export default function App() {
     <div className="page">
       <Header black={blackHeader} />
 
-      {featuredData
-        && <FeaturedMovie item={featuredData} />}
+      {/* SE TEM O FEATURED DATA ACONTECE / && COMERCIAL IMPORTANTE */}
+      {featuredData && <FeaturedMovie item={featuredData} />}
 
       <section className="lists">
         {movieList.map((item) => (
@@ -63,6 +63,14 @@ export default function App() {
       <footer>
         <h4>Desenvolvido por: Luis Gabriel</h4>
       </footer>
+
+      {movieList.length <= 0
+      && (
+      <div className="loading">
+        <img src="https://media.tenor.com/Rfyx9OkRI38AAAAC/netflix-netflix-startup.gif" alt="loading" />
+      </div>
+      )}
     </div>
+
   );
 }

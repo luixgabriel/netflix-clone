@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 export default function ListMovies({ title, itens }) {
-  const [scrollX, SetScrollX] = useState(-400);
+  const [scrollX, SetScrollX] = useState(0);
   const handleLeftArrow = () => {
     let x = scrollX + Math.round(window.innerWidth / 2);
     if (x > 0) {
