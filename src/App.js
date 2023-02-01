@@ -15,6 +15,7 @@ export default function App() {
       setMovieList(list);
 
       const originals = list.filter((item) => item.slug === 'originals');
+      console.log(originals[0].itens.results.length);
       const randomChosen = Math.floor(Math.random() * (originals[0].itens.results.length - 1));
       const choosen = originals[0].itens.results[randomChosen];
       const choosenInfo = await TMDB.getMovieinfo(choosen.id, 'tv');
